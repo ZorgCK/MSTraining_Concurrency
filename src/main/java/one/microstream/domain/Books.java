@@ -4,19 +4,17 @@ import static java.util.stream.Collectors.toList;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-import one.microstream.concurrent.ReadWriteLocked;
 import one.microstream.persistence.types.Persister;
 import one.microstream.storage.DB;
 
 
-public class Books extends ReadWriteLocked
+public class Books
 {
-	private final Map<String, Book>			isbn13ToBook	= new HashMap<>();
-	private final Map<Author, List<Book>>	authorToBooks	= new HashMap<>();
+	private final ConcurrentHashMap<String, Book>		isbn13ToBook	= new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<Author, List<Book>>	authorToBooks	= new ConcurrentHashMap<>();
 	
 	public void add(final Book book)
 	{
@@ -32,22 +30,16 @@ public class Books extends ReadWriteLocked
 		final Book book,
 		final Persister persister)
 	{
-		this.write(() ->
-		{
-			this.addToCollections(book);
-			this.storeCollections(persister);
-		});
+		this.addToCollections(book);
+		this.storeCollections(persister);
 	}
 	
 	private void addAll(
 		final Collection<? extends Book> books,
 		final Persister persister)
 	{
-		this.write(() ->
-		{
-			books.forEach(this::addToCollections);
-			this.storeCollections(persister);
-		});
+		books.forEach(this::addToCollections);
+		this.storeCollections(persister);
 	}
 	
 	private void addToCollections(final Book book)
@@ -74,30 +66,24 @@ public class Books extends ReadWriteLocked
 	
 	public List<Book> all()
 	{
-		return this.read(() -> this.isbn13ToBook.values().stream().collect(toList()));
+		return this.isbn13ToBook.values().stream().collect(toList());
 	}
 	
 	public void deleteAll()
 	{
-		this.write(() ->
-		{
-			authorToBooks.clear();
-			isbn13ToBook.clear();
-			this.storeCollections(DB.storageManager);
-		});
+		authorToBooks.clear();
+		isbn13ToBook.clear();
+		this.storeCollections(DB.storageManager);
 	}
 	
 	public void removeRandom()
 	{
-		this.write(() ->
-		{
-			String first = isbn13ToBook.keySet().stream().findFirst().get();
-			Book book = isbn13ToBook.get(first);
-			
-			isbn13ToBook.remove(first);
-			authorToBooks.get(book.getAuthor()).remove(book);
-			
-			this.storeCollections(DB.storageManager);
-		});
+		String first = isbn13ToBook.keySet().stream().findFirst().get();
+		Book book = isbn13ToBook.get(first);
+		
+		isbn13ToBook.remove(first);
+		authorToBooks.get(book.getAuthor()).remove(book);
+		
+		this.storeCollections(DB.storageManager);
 	}
 }
