@@ -79,33 +79,29 @@ public class MockupUtils
 	
 	private static Book parseBookObject(JSONObject book, List<Author> authors)
 	{
-		Book b = new Book();
-		
-		b.setIsbn((String)book.get("isbn"));
-		b.setName((String)book.get("name"));
-		
 		String release = (String)book.get("release");
 		LocalDate date = LocalDate.parse(release, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-		b.setRelease(date);
-		
 		Double price = (Double)book.get("price");
-		b.setPrice(new BigDecimal(price));
-		
 		Long authorID = (Long)book.get("author");
-		b.setAuthor(authors.stream().filter(a -> a.getId().equals(authorID.toString())).findFirst().get());
+		Author author = authors.stream().filter(a -> a.getId().equals(authorID.toString())).findFirst().get();
+		
+		Book b = new Book(
+			(String)book.get("isbn"),
+			(String)book.get("name"),
+			date,
+			new BigDecimal(price),
+			author);
 		
 		return b;
 	}
 	
 	private static Author parseAuthorObject(JSONObject author)
 	{
-		Author a = new Author();
-		
-		a.setId(((Long)author.get("id")).toString());
-		a.setLastname((String)author.get("last_name"));
-		a.setFirstname((String)author.get("first_name"));
-		a.setEmail((String)author.get("email"));
-		a.setGender((String)author.get("gender"));
+		Author a = new Author(
+			((Long)author.get("id")).toString(),
+			(String)author.get("first_name"),
+			(String)author.get("email"),
+			(String)author.get("gender"));
 		
 		return a;
 	}

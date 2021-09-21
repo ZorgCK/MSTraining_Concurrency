@@ -1,6 +1,7 @@
 package one.microstream.storage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import one.microstream.domain.Book;
@@ -8,16 +9,10 @@ import one.microstream.domain.Book;
 
 public class DataRoot
 {
-	private List<Book> books = new ArrayList<Book>();
+	private final List<Book> books = Collections.synchronizedList(new ArrayList<Book>());
 	
 	public List<Book> getBooks()
 	{
 		return books;
 	}
-	
-	public void setBooks(List<Book> books)
-	{
-		this.books = books;
-	}
-	
 }

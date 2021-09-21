@@ -2,24 +2,18 @@ package one.microstream.domain;
 
 public class Author
 {
-	private String				id;
-	private String				firstname;
-	private String				lastname;
-	private String				email;
-	private String				gender;
-	private transient String	alias;
+	private final String	id;
+	private final String	firstname;
+	private String			lastname;
+	private String			email;
+	private final String	gender;
+	private String			alias;
 	
-	public Author()
-	{
-		super();
-	}
-	
-	public Author(String id, String firstname, String lastname, String email, String gender)
+	public Author(String id, String firstname, String email, String gender)
 	{
 		super();
 		this.id = id;
 		this.firstname = firstname;
-		this.lastname = lastname;
 		this.email = email;
 		this.gender = gender;
 	}
@@ -29,19 +23,9 @@ public class Author
 		return id;
 	}
 	
-	public void setId(String id)
-	{
-		this.id = id;
-	}
-	
 	public String getFirstname()
 	{
 		return firstname;
-	}
-	
-	public void setFirstname(String firstname)
-	{
-		this.firstname = firstname;
 	}
 	
 	public String getLastname()
@@ -49,7 +33,7 @@ public class Author
 		return lastname;
 	}
 	
-	public void setLastname(String lastname)
+	public synchronized void setLastname(String lastname)
 	{
 		this.lastname = lastname;
 	}
@@ -59,7 +43,7 @@ public class Author
 		return email;
 	}
 	
-	public void setEmail(String email)
+	public synchronized void setEmail(String email)
 	{
 		this.email = email;
 	}
@@ -69,17 +53,12 @@ public class Author
 		return gender;
 	}
 	
-	public void setGender(String gender)
-	{
-		this.gender = gender;
-	}
-	
 	public String getAlias()
 	{
 		return alias;
 	}
 	
-	public void setAlias(String alias)
+	public synchronized void setAlias(String alias)
 	{
 		this.alias = alias;
 	}

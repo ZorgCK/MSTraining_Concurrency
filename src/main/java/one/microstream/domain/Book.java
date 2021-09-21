@@ -6,16 +6,11 @@ import java.time.LocalDate;
 
 public class Book
 {
-	private String		isbn;
-	private String		name;
-	private LocalDate	release;
-	private BigDecimal	price;
-	private Author		author;
-	
-	public Book()
-	{
-		super();
-	}
+	private final String	isbn;
+	private final String	name;
+	private final LocalDate	release;
+	private BigDecimal		price;
+	private final Author	author;
 	
 	public Book(String isbn, String name, LocalDate release, BigDecimal price, Author author)
 	{
@@ -23,6 +18,7 @@ public class Book
 		this.isbn = isbn;
 		this.name = name;
 		this.price = price;
+		this.release = release;
 		this.author = author;
 	}
 	
@@ -31,19 +27,9 @@ public class Book
 		return isbn;
 	}
 	
-	public void setIsbn(String isbn)
-	{
-		this.isbn = isbn;
-	}
-	
 	public String getName()
 	{
 		return name;
-	}
-	
-	public void setName(String name)
-	{
-		this.name = name;
 	}
 	
 	public BigDecimal getPrice()
@@ -51,19 +37,9 @@ public class Book
 		return price;
 	}
 	
-	public void setPrice(BigDecimal price)
-	{
-		this.price = price;
-	}
-	
 	public Author getAuthor()
 	{
 		return author;
-	}
-	
-	public void setAuthor(Author author)
-	{
-		this.author = author;
 	}
 	
 	public LocalDate getRelease()
@@ -71,9 +47,9 @@ public class Book
 		return release;
 	}
 	
-	public void setRelease(LocalDate release)
+	public void setPrice(BigDecimal price)
 	{
-		this.release = release;
+		this.price = price;
 	}
 	
 }
