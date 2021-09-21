@@ -1,6 +1,5 @@
 package one.microstream.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
 import io.micronaut.http.HttpResponse;
@@ -31,17 +30,6 @@ public class BookController
 		while(true)
 		{
 			DB.root.getBooks().forEach(book -> System.out.println(book.getName()));
-		}
-	}
-	
-	@Get("/createexception")
-	public void createException()
-	{
-		List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5, 6);
-		
-		for(Integer integer : integers)
-		{
-			integers.remove(1);
 		}
 	}
 	
