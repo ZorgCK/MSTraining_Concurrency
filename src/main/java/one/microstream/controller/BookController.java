@@ -1,6 +1,5 @@
 package one.microstream.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
 import io.micronaut.http.HttpResponse;
@@ -30,25 +29,14 @@ public class BookController
 	{
 		while(true)
 		{
-			DB.root.getBooks().forEach(book -> System.out.println(book.getName()));
-		}
-	}
-	
-	@Get("/createexception")
-	public void createException()
-	{
-		List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5, 6);
-		
-		for(Integer integer : integers)
-		{
-			integers.remove(1);
+			DB.root.getBooks().all().forEach(book -> System.out.println(book.getName()));
 		}
 	}
 	
 	@Get("/deletebook")
 	public HttpResponse<?> deleterandom()
 	{
-		DB.root.getBooks().remove(100);
+		DB.root.getBooks().removeRandom();
 		
 		return HttpResponse.ok("Book deleted!");
 	}
@@ -56,14 +44,13 @@ public class BookController
 	@Get
 	public List<Book> getBook()
 	{
-		return DB.root.getBooks();
+		return DB.root.getBooks().all();
 	}
 	
 	@Get("/clear")
 	public HttpResponse<?> clearBooks()
 	{
-		DB.root.getBooks().clear();
-		DB.storageManager.store(DB.root.getBooks());
+		DB.root.getBooks().deleteAll();
 		
 		return HttpResponse.ok("Books successfully cleared!");
 	}

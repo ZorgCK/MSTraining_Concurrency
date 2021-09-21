@@ -1,18 +1,15 @@
 package one.microstream.storage;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import one.microstream.domain.Book;
+import one.microstream.domain.Books;
 
 
 public class DataRoot
 {
-	private final List<Book> books = Collections.synchronizedList(new ArrayList<Book>());
+	private final Books books = new Books();
 	
-	public List<Book> getBooks()
+	public Books getBooks()
 	{
 		return books;
 	}
+	
 }
