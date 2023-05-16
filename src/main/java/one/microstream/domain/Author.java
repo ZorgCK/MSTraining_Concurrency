@@ -33,7 +33,7 @@ public class Author
 		return lastname;
 	}
 	
-	public synchronized void setLastname(String lastname)
+	public void setLastname(String lastname)
 	{
 		this.lastname = lastname;
 	}
@@ -43,7 +43,7 @@ public class Author
 		return email;
 	}
 	
-	public synchronized void setEmail(String email)
+	public void setEmail(String email)
 	{
 		this.email = email;
 	}
@@ -58,7 +58,7 @@ public class Author
 		return alias;
 	}
 	
-	public synchronized void setAlias(String alias)
+	public void setAlias(String alias)
 	{
 		this.alias = alias;
 	}
