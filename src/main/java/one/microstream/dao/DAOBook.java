@@ -34,13 +34,13 @@ public class DAOBook extends ReadWriteLocked
 	
 	public void iterate()
 	{
-		this.read(() ->
+		while(true)
 		{
-			while(true)
+			this.read(() ->
 			{
 				db.getRoot().getBooks().forEach(book -> System.out.println(book.getName()));
-			}
-		});
+			});
+		}
 	}
 	
 	public List<Book> books()
