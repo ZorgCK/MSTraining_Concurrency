@@ -1,15 +1,19 @@
 package one.microstream.storage;
 
-import one.microstream.domain.Books;
+import java.util.ArrayList;
+import java.util.List;
+
+import one.microstream.domain.Book;
 
 
 public class DataRoot
 {
-	private final Books books = new Books();
-	
-	public Books getBooks()
+	private final List<Book> books = new ArrayList<>();
+
+	public List<Book> getBooks()
 	{
 		return books;
 	}
+	
 	
 }

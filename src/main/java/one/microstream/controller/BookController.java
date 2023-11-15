@@ -5,21 +5,23 @@ import java.util.List;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
+import jakarta.inject.Inject;
+import one.microstream.dao.DAOBook;
 import one.microstream.domain.Book;
-import one.microstream.storage.DB;
 import one.microstream.utils.MockupUtils;
 
 
 @Controller("/books")
 public class BookController
 {
+	@Inject private DAOBook dao;
+	
 	@Get("/create")
 	public HttpResponse<?> createBooks()
 	{
-		List<Book> allCreatedBooks = MockupUtils.loadMockupData();
+		List<Book> createdBooks = MockupUtils.loadMockupData();
 		
-		DB.root.getBooks().addAll(allCreatedBooks);
-		DB.storageManager.store(DB.root.getBooks());
+		dao.addBooks(createdBooks);
 		
 		return HttpResponse.ok("Books successfully created!");
 	}
@@ -27,16 +29,13 @@ public class BookController
 	@Get("/iterate")
 	public void runThrough()
 	{
-		while(true)
-		{
-			DB.root.getBooks().all().forEach(book -> System.out.println(book.getName()));
-		}
+		dao.iterate();
 	}
 	
 	@Get("/deletebook")
 	public HttpResponse<?> deleterandom()
 	{
-		DB.root.getBooks().removeRandom();
+		dao.deleteRandomBook();
 		
 		return HttpResponse.ok("Book deleted!");
 	}
@@ -44,13 +43,13 @@ public class BookController
 	@Get
 	public List<Book> getBook()
 	{
-		return DB.root.getBooks().all();
+		return dao.books();
 	}
 	
 	@Get("/clear")
 	public HttpResponse<?> clearBooks()
 	{
-		DB.root.getBooks().deleteAll();
+		dao.clearBooks();
 		
 		return HttpResponse.ok("Books successfully cleared!");
 	}
