@@ -15,4 +15,9 @@ public class DataRoot
 	{
 		return books;
 	}
+	
+	public void clear()
+	{
+		books.clear();
+	}
 }

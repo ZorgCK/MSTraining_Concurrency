@@ -1,37 +1,37 @@
 package one.microstream.dal;
 
-import java.math.BigDecimal;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
+import java.util.List;
 
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import one.microstream.domain.Book;
-import one.microstream.persistence.types.Storer;
 import one.microstream.storage.DB;
 
+@Singleton
 public class DAOBook
 {
-	private static synchronized void batchUpdate(Predicate<Book> filter, Consumer<Book> writer)
+	@Inject DB db;
+	
+	public void addBooks(List<Book> books)
 	{
-		Storer storer = DB.storageManager.createEagerStorer();
-		
-		DB.root.getBooks().stream().filter(filter).forEach(b ->
-		{
-			writer.accept(b);
-			storer.store(b);
-		});
-		
-		storer.commit();
+		db.getRoot().getBooks().addAll(books);
+		db.store(db.getRoot().getBooks());
 	}
 	
-	/**
-	 * Example call
-	 */
-	private static void callbatchUpdate()
+	public void clearBooks()
 	{
-		Predicate<Book> pred = p -> p.getName().startsWith("A");
-		
-		batchUpdate(pred, a -> {
-			a.setPrice(a.getPrice().multiply(new BigDecimal(0.9)));
-		});
+		db.getRoot().getBooks().clear();
+		db.store(db.getRoot().getBooks());
+	}
+	
+	public List<Book> books()
+	{
+		return db.getRoot().getBooks();
+	}	
+	
+	public void deleteRandomBook()
+	{
+		db.getRoot().getBooks().remove(100);
 	}
 }
+
