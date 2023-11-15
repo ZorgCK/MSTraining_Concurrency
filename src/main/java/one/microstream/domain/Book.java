@@ -6,11 +6,11 @@ import java.time.LocalDate;
 
 public class Book
 {
-	private final String	isbn;
-	private final String	name;
-	private final LocalDate	release;
+	private String	isbn;
+	private String	name;
+	private LocalDate	release;
 	private BigDecimal		price;
-	private final Author	author;
+	private Author	author;
 	
 	public Book(String isbn, String name, LocalDate release, BigDecimal price, Author author)
 	{

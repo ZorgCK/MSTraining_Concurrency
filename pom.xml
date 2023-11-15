@@ -16,8 +16,8 @@
 
 	<properties>
 		<packaging>jar</packaging>
-		<jdk.version>11</jdk.version>
-		<release.version>11</release.version>
+		<jdk.version>17</jdk.version>
+		<release.version>17</release.version>
 		<micronaut.version>3.0.1</micronaut.version>
 		<exec.mainClass>one.microstream.Application</exec.mainClass>
 		<micronaut.runtime>netty</micronaut.runtime>
@@ -84,12 +84,12 @@
 		<dependency>
 			<groupId>one.microstream</groupId>
 			<artifactId>microstream-storage-embedded</artifactId>
-			<version>05.00.02-MS-GA</version>
+			<version>08.01.01-MS-GA</version>
 		</dependency>
 		<dependency>
 			<groupId>one.microstream</groupId>
 			<artifactId>microstream-storage-embedded-configuration</artifactId>
-			<version>05.00.02-MS-GA</version>
+			<version>08.01.01-MS-GA</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
 		<dependency>

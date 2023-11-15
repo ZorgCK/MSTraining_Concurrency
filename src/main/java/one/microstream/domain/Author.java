@@ -2,12 +2,12 @@ package one.microstream.domain;
 
 public class Author
 {
-	private final String	id;
-	private final String	firstname;
-	private String			lastname;
-	private String			email;
-	private final String	gender;
-	private String			alias;
+	private String	id;
+	private String	firstname;
+	private String	lastname;
+	private String	email;
+	private String	gender;
+	private String	alias;
 	
 	public Author(String id, String firstname, String email, String gender)
 	{
