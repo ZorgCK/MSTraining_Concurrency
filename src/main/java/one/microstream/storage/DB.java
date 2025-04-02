@@ -1,13 +1,13 @@
 package one.microstream.storage;
 
+import org.eclipse.store.storage.embedded.configuration.types.EmbeddedStorageConfiguration;
+import org.eclipse.store.storage.embedded.types.EmbeddedStorageManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.micronaut.context.ApplicationContext;
 import io.micronaut.context.annotation.Context;
 import jakarta.inject.Inject;
-import one.microstream.storage.embedded.configuration.types.EmbeddedStorageConfiguration;
-import one.microstream.storage.embedded.types.EmbeddedStorageManager;
 
 
 @Context
