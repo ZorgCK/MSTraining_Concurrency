@@ -7,10 +7,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-import one.microstream.persistence.types.Persister;
+import org.eclipse.serializer.persistence.types.Persister;
+
+import io.micronaut.serde.annotation.Serdeable;
 import one.microstream.storage.DB;
 
-
+@Serdeable
 public class Books
 {
 	private final ConcurrentHashMap<String, Book>		isbn13ToBook	= new ConcurrentHashMap<>();

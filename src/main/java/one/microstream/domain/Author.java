@@ -1,5 +1,8 @@
 package one.microstream.domain;
 
+import io.micronaut.serde.annotation.Serdeable;
+
+@Serdeable
 public class Author
 {
 	private final String	id;
