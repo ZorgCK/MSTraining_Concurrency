@@ -3,7 +3,9 @@ package one.microstream.domain;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import io.micronaut.serde.annotation.Serdeable;
 
+@Serdeable
 public class Book
 {
 	private final String	isbn;
